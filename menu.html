@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(11, 11, 87);
+        }
+
+#fooditeams{
+    font-size: 80px;
+    color: honeydew;
+}
+#iteam{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 50px;
+
+}
+img{
+    width: 100%;
+    height: 320px;
+    border-radius: 15px;
+}
+h1{
+    background-color: darkgrey;
+    font-size: 50px;
+}
+h3{
+    color: rgb(185, 175, 175);
+    font-size: 27px;
+}
+h4{
+    color: rgb(172, 159, 159);
+    font-size: 24px;
+    font-style: italic;
+}
+
+
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <h1>Chicken Menu</h1>
+        <div id="fooditeams"></div>
+    </div>
+   <div id="mainbox"><div id="iteam"></div></div> 
+</body>
+</html>
+<script>
+
+    var cart=JSON.parse(localStorage.getItem("cartiteam"))||[];
+
+    var url="https://www.themealdb.com/api/json/v1/1/search.php?s=chicken";
+
+    async function datashow(){
+
+        let result=await fetch(url);
+        let data = await result.json();
+        let datam=data.meals;
+        console.log(datam);
+        dishshow(datam)
+    }
+
+
+    datashow();
+
+    function dishshow(datam){
+        datam.map(function(el){
+
+            let name=document.createElement("h3");
+            name.textContent=el.strMeal;
+
+
+            let price= document.createElement("h4");
+            price.textContent=Math.floor(Math.random()*(500-100+100));
+            
+            let div= document.createElement("div");
+            
+
+            let div1= document.createElement("div");
+            
+
+            let img = document.createElement("img");
+            img.src=el.strMealThumb;
+
+            let button = document.createElement("button");
+
+            button.textContent="AddToCart";
+
+            div1.append(price, button);
+            div.append(img, name, div1);
+            document.getElementById("iteam").append(div);
+
+            button.addEventListener("click",addTocart);
+
+            function addTocart(){
+                let obj= {
+                    name: el.strMeal,
+                    img:el.strMealThumb,
+                    price:Math.floor(Math.random()*(500-100+100)),
+                };
+                cart.push(obj);
+
+                localStorage.setItem("cartiteam", JSON.stringify(cart));
+                iteamk();
+            }
+
+        })
+    }
+
+    function iteamk(){
+        document.getElementById("fooditeams").textContent="";
+        document.getElementById("fooditeams").textContent=cart.length;
+    }
+
+
+</script>

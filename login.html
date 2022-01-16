@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(https://img.freepik.com/free-photo/fresh-colourful-ingredients-mexican-cuisine_23-2148254294.jpg?size=626&ext=jpg);
+        }
+        h1{
+            background-color:navy ;
+            color: oldlace;
+            font-size: 50px;
+            text-align: center;
+        }
+div{
+    text-align: center;
+}
+input{
+    border-color: darkslateblue;
+}
+    </style>
+</head>
+<body>
+    <h1>Log-In Here</h1>
+  <div> <input type="text" id="email" placeholder="Enter Email-Id"/>
+    <input type="password" id="passward" placeholder="Enter Passward"/>
+    <input type="submit" id="submit"/></div>
+
+    
+</body>
+</html>
+<script>
+
+    document.getElementById("submit").addEventListener("click", login);
+
+    var arr= JSON.parse(localStorage.getItem("signupdata"));
+
+    //console.log(arr);
+
+    function login(){
+
+        var email1= document.getElementById("email").value;
+        var passward1= document.getElementById("passward").value;
+
+        for(var r=0; r<arr.length; r++){
+           // console.log(arr[r])
+           if(arr[r].Email==email1 && arr[r].Passward==passward1){
+               alert("Login Sucessful !");
+               window.location.href="menu.html"
+           }
+
+           else{
+               alert("Wrong Credentils !")
+           }
+        }
+    }
+
+
+
+
+
+
+
+</script>

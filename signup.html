@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(https://wallpaperaccess.com/full/4883006.jpg);
+        }
+        h1{
+            background-color: whitesmoke;
+            font-size: 50px;
+            text-align: center;
+        }
+        form{
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+
+        <h1>Sign-Up</h1>
+        <form id="form">
+            <input type="text" placeholder="Enter Your Name" id="name"/>
+            <input type="text" placeholder="Enter Your Email-id" id="email"/>
+            <input type="number" placeholder="Enter Number" id="number"/>
+            <input type="password" placeholder="Enter Passward" id="passward"/>
+            <input type="submit" id="submit"/>
+        </form>
+ </div>
+</body>
+</html>
+<script>
+    document.getElementById("submit").addEventListener("click", signup);
+    var arr=JSON.parse(localStorage.getItem("signupdata"))||[]
+
+    function signup(elem){
+        elem.preventDefault();
+
+        var name= document.getElementById("name").value;
+        var email= document.getElementById("email").value;
+        var number= document.getElementById("number").value;
+        var passward= document.getElementById("passward").value;
+
+
+        var obj={
+            Name:name,
+            Email:email,
+            Number:number,
+            Passward:passward
+        }
+
+      arr.push(obj);
+      //console.log(arr);
+
+      localStorage.setItem("signupdata", JSON.stringify(arr));
+
+      if(name==""|| email==""||number==""|| passward==""){
+          alert("Please fill all details !")
+      }
+      else{
+          alert("Sign-Up sucessfully !");
+          window.location.href="login.html"
+      }
+
+
+
+    }
+
+
+
+
+
+
+
+
+</script>
